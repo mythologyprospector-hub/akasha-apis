@@ -1,0 +1,31 @@
+apis:
+
+  github:
+    type: software_graph
+    endpoint: https://api.github.com
+    auth: token
+    collector: github_api.py
+
+  wikidata:
+    type: knowledge_graph
+    endpoint: https://query.wikidata.org/sparql
+    auth: none
+    collector: wikidata_api.py
+
+  nasa:
+    type: science_data
+    endpoint: https://api.nasa.gov
+    auth: api_key
+    collector: nasa_api.py
+
+  openalex:
+    type: research_graph
+    endpoint: https://api.openalex.org
+    auth: optional
+    collector: openalex_api.py
+
+  arxiv:
+    type: research_papers
+    endpoint: http://export.arxiv.org/api/query
+    auth: none
+    collector: arxiv_api.py
