@@ -1,0 +1,13 @@
+repo: akasha-apis
+
+role: integration
+layer: external
+
+description: >
+  Registry and configuration layer for external APIs used by the Akasha ecosystem.
+
+interfaces:
+  - akasha-world
+  - akasha-axioms
+
+status: active
