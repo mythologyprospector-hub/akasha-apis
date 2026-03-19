@@ -105,3 +105,6 @@ Forge builds with it.
 ---
 
 Akasha APIs expand the system's awareness.
+---
+
+This repository participates in the Akasha ecosystem and is described by repo-manifest.yaml.
