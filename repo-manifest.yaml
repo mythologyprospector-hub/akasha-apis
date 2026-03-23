@@ -15,4 +15,6 @@ status:
 name: akasha-apis
 type: module
 domain: systems
-depends_on: []
+depends_on:
+- akasha-world
+- akasha-bridge
