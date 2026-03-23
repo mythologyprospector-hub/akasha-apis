@@ -1,13 +1,18 @@
 repo: akasha-apis
-
 role: integration
 layer: external
+description: 'Registry and configuration layer for external APIs used by the Akasha
+  ecosystem.
 
-description: >
-  Registry and configuration layer for external APIs used by the Akasha ecosystem.
-
+  '
 interfaces:
-  - akasha-world
-  - akasha-axioms
-
-status: active
+- akasha-world
+- akasha-axioms
+status:
+  maturity: experimental
+  confidence: low
+  active: true
+name: akasha-apis
+type: module
+domain: systems
+depends_on: []
