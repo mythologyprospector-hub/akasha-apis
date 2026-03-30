@@ -1,11 +1,10 @@
 # Authentication
 
-API keys are stored in a local environment file:
+V2 keeps authentication minimal.
 
-.env.akasha
+Current adapters are no-auth or stub-first.
 
-Example:
-
-GITHUB_TOKEN=your_token_here
-
-Never commit real keys to the repository.
+If a provider later requires auth:
+- add env variable entry to `API_KEYS.env.example`
+- keep secrets out of canon
+- surface `auth_required` in adapter metadata

@@ -1,22 +1,22 @@
-# API Usage Guide
+# API Usage
 
-Collectors fetch external data and normalize it into artifacts usable by the Akasha ecosystem.
+## Adapter contract
 
-Example:
+Every adapter should implement:
+
+- `fetch(**kwargs)`
+- `normalize(raw, **kwargs)`
+- `metadata()`
+
+Optional helper:
+- `get(**kwargs)` → fetch + normalize
+
+## Example
 
 ```python
-import requests
+from akasha_apis.weather.open_meteo import OpenMeteoWeatherAdapter
 
-def collect_github_repo(repo):
-    url = f"https://api.github.com/repos/{repo}"
-    r = requests.get(url)
-
-    data = r.json()
-
-    return {
-        "type": "repository",
-        "name": data["name"],
-        "stars": data["stargazers_count"],
-        "forks": data["forks"]
-    }
+adapter = OpenMeteoWeatherAdapter()
+payload = adapter.get(latitude=38.42, longitude=-82.44)
+print(payload)
 ```

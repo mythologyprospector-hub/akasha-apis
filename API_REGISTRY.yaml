@@ -1,31 +1,37 @@
-apis:
+providers:
+  astronomy:
+    - name: sunrise-sunset
+      module: akasha_apis.astronomy.sunrise_sunset
+      auth: none
+      status: active
+      outputs:
+        - sunrise_local
+        - sunset_local
+        - is_daylight
+    - name: lunar-stub
+      module: akasha_apis.astronomy.lunar_stub
+      auth: none
+      status: stub
+      outputs:
+        - moon_phase
+        - moon_illumination_pct
 
-  github:
-    type: software_graph
-    endpoint: https://api.github.com
-    auth: token
-    collector: github_api.py
+  weather:
+    - name: open-meteo
+      module: akasha_apis.weather.open_meteo
+      auth: none
+      status: active
+      outputs:
+        - temperature_c
+        - humidity_pct
+        - pressure_mb
+        - wind_kph
+        - precipitation_mm
 
-  wikidata:
-    type: knowledge_graph
-    endpoint: https://query.wikidata.org/sparql
-    auth: none
-    collector: wikidata_api.py
-
-  nasa:
-    type: science_data
-    endpoint: https://api.nasa.gov
-    auth: api_key
-    collector: nasa_api.py
-
-  openalex:
-    type: research_graph
-    endpoint: https://api.openalex.org
-    auth: optional
-    collector: openalex_api.py
-
-  arxiv:
-    type: research_papers
-    endpoint: http://export.arxiv.org/api/query
-    auth: none
-    collector: arxiv_api.py
+  geo:
+    - name: timezone-lookup
+      module: akasha_apis.geo.timezone_lookup
+      auth: none
+      status: active
+      outputs:
+        - timezone_name

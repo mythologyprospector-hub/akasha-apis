@@ -1,110 +1,79 @@
-# Akasha APIs
+# akasha-apis
 
-Akasha APIs define the standardized interfaces between the Akasha ecosystem
-and external data sources.
+Akasha's external API adapter layer.
 
-This repository contains connectors, authentication patterns, and normalization
-schemas for interacting with public APIs.
-
-These connectors allow Akasha systems to gather artifacts from the outside world
-without embedding API logic throughout the ecosystem.
-
----
+This repo provides normalized adapters for outside data sources so other Akasha systems
+do not need to speak raw provider dialects directly.
 
 ## Purpose
 
-Akasha APIs serve as the ecosystem's **data interface layer**.
+`akasha-apis` sits between:
 
-External services → API connectors → normalized artifacts → Akasha systems
+- external services
+- Akasha-native systems
 
-This separation ensures that:
+It is responsible for:
 
-- external dependencies remain modular
-- API credentials remain isolated
-- collectors remain replaceable
-- internal systems remain stable
+- fetching data from providers
+- normalizing responses into Akasha-shaped payloads
+- exposing provider metadata
+- keeping source-specific weirdness out of higher layers
 
----
+## What it is not
 
-## Components
+This repo is **not**:
 
-### API Registry
+- a discovery catalog
+- a bookmark atlas
+- a dashboard repo
+- a pattern-analysis engine
+- a meaning-making layer
 
-`API_REGISTRY.yaml`
+That means:
 
-Defines known APIs, endpoints, authentication methods, and associated collectors.
+- Grand Atlas discovers candidate APIs and tools
+- `akasha-apis` implements stable adapters to chosen sources
+- `akasha-time-nexus` consumes those adapters to enrich event records
 
----
+## Core adapter contract
 
-### API Credentials
+Every adapter should expose the same basic surface:
 
-`API_KEYS.env.example`
+- `fetch(...)`
+- `normalize(raw)`
+- `metadata()`
 
-Template for configuring API credentials locally.
+A thin convenience method like `get(...)` may combine fetch + normalize.
 
-Never commit real keys to this repository.
+## Initial provider classes
 
----
+V2 includes starter adapters for:
 
-### Collectors
+- astronomy
+  - sunrise/sunset provider
+  - lunar context stub
+- weather
+  - Open-Meteo snapshot provider
+- geo
+  - timezone lookup from coordinates
 
-Collectors implement connectors for specific APIs.
+## Relationship to other Akasha repos
 
-Examples:
+```text
+Grand Atlas
+    discovers APIs, datasets, services
 
-- GitHub API
-- NASA API
-- Wikidata SPARQL
-- OpenAlex research graph
-- arXiv paper search
+akasha-apis
+    implements normalized adapters
 
-Collectors return normalized artifacts usable by:
+akasha-time-nexus
+    consumes adapters to build context bundles
+```
 
-- Akasha Lens
-- Akasha Discovery
-- Akasha Forge
+## Next moves
 
----
-
-### Schemas
-
-Schemas define normalized artifact formats returned by collectors.
-
-These schemas ensure consistent data structures across the ecosystem.
-
----
-
-## Philosophy
-
-External systems change frequently.
-
-Akasha APIs isolate those changes from the rest of the ecosystem.
-
-Collectors may evolve.
-
-The internal ontology remains stable.
-
----
-
-## Role in the Akasha Ecosystem
-
-Akasha APIs function as **external sensors**.
-
-They gather signals from the wider world and convert them into artifacts
-that can be interpreted by the system.
-
-Axioms define the laws.
-World defines the ontology.
-Constellation defines the map.
-
-APIs gather new information from reality.
-Lens interprets it.
-Discovery explores it.
-Forge builds with it.
-
----
-
-Akasha APIs expand the system's awareness.
----
-
-This repository participates in the Akasha ecosystem and is described by repo-manifest.yaml.
+- add caching
+- expand provider registry
+- add tides provider
+- add geomagnetic provider
+- add tests around normalization contracts

@@ -1,8 +1,11 @@
 {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Akasha API Normalized Payload",
   "type": "object",
   "properties": {
-    "type": {"type": "string"},
-    "source": {"type": "string"},
-    "data": {"type": "object"}
-  }
+    "provider": { "type": "string" },
+    "provider_type": { "type": "string" },
+    "payload": { "type": "object" }
+  },
+  "required": ["provider", "provider_type", "payload"]
 }

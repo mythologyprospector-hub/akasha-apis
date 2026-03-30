@@ -1,20 +1,41 @@
-repo: akasha-apis
-role: integration
-layer: external
-description: 'Registry and configuration layer for external APIs used by the Akasha
-  ecosystem.
+repo:
+  name: akasha-apis
+  ecosystem: akasha
+  version: 0.2.0
+  status: active
 
-  '
+identity:
+  role: adapter
+  layer: external
+  description: >
+    Adapter and normalization layer for external APIs used by Akasha systems.
+
+ownership:
+  steward: human
+  approval_required: true
+
 interfaces:
-- akasha-world
-- akasha-axioms
-status:
-  maturity: experimental
-  confidence: low
-  active: true
-name: akasha-apis
-type: module
-domain: systems
-depends_on:
-- akasha-world
-- akasha-bridge
+  consumes:
+    - external_api_services
+    - api_credentials
+    - coordinates
+    - timestamps
+  produces:
+    - normalized_provider_payloads
+    - adapter_metadata
+    - source-specific context fragments
+
+capabilities:
+  - provider_fetch
+  - payload_normalization
+  - adapter_metadata
+  - source_abstraction
+
+alignment:
+  axioms_required: true
+  canonical_structure: true
+  interpretation_free_core: true
+
+notes:
+  - "Grand Atlas may act as the neighboring registry of candidate providers."
+  - "akasha-time-nexus is the main early consumer of these adapters."
