@@ -1,79 +1,67 @@
 # akasha-apis
 
-Akasha's external API adapter layer.
+## Engine Role
 
-This repo provides normalized adapters for outside data sources so other Akasha systems
-do not need to speak raw provider dialects directly.
+Akasha APIs is the external API adapter and normalization engine of the Akasha constellation.
 
-## Purpose
+## Why it exists
 
-`akasha-apis` sits between:
+This repo exists to connect outside data sources to the Akasha ecosystem in a disciplined and reusable way. It provides a clean boundary between external providers and internal Akasha engines.
 
-- external services
-- Akasha-native systems
+## Inputs
 
-It is responsible for:
+Main inputs include:
 
-- fetching data from providers
-- normalizing responses into Akasha-shaped payloads
-- exposing provider metadata
-- keeping source-specific weirdness out of higher layers
+- external API endpoints
+- provider credentials
+- source queries
+- adapter configuration
 
-## What it is not
+## Memory / Registry
 
-This repo is **not**:
+This repo may maintain:
 
-- a discovery catalog
-- a bookmark atlas
-- a dashboard repo
-- a pattern-analysis engine
-- a meaning-making layer
+- adapter configuration
+- provider mappings
+- response normalization rules
+- cached source payloads when needed
 
-That means:
+## Relation Model
 
-- Grand Atlas discovers candidate APIs and tools
-- `akasha-apis` implements stable adapters to chosen sources
-- `akasha-time-nexus` consumes those adapters to enrich event records
+The relation model is translational:
 
-## Core adapter contract
+external provider  
+→ adapter  
+→ normalized internal payload
 
-Every adapter should expose the same basic surface:
+It bridges outside systems into Akasha-readable form.
 
-- `fetch(...)`
-- `normalize(raw)`
-- `metadata()`
+## Evaluator
 
-A thin convenience method like `get(...)` may combine fetch + normalize.
+This repo evaluates:
 
-## Initial provider classes
+- provider availability
+- response validity
+- payload normalization quality
+- adapter success and failure states
 
-V2 includes starter adapters for:
+## Outputs
 
-- astronomy
-  - sunrise/sunset provider
-  - lunar context stub
-- weather
-  - Open-Meteo snapshot provider
-- geo
-  - timezone lookup from coordinates
+This repo produces:
 
-## Relationship to other Akasha repos
+- normalized source payloads
+- provider responses
+- adapter outputs for downstream engines
 
-```text
-Grand Atlas
-    discovers APIs, datasets, services
+## Position in Constellation
 
-akasha-apis
-    implements normalized adapters
+Akasha APIs sits between outside providers and internal Akasha systems. It is the integration layer that helps source-oriented engines consume outside information cleanly.
 
-akasha-time-nexus
-    consumes adapters to build context bundles
-```
+## Next Steps
 
-## Next moves
+Immediate next steps:
 
-- add caching
-- expand provider registry
-- add tides provider
-- add geomagnetic provider
-- add tests around normalization contracts
+- improve provider coverage
+- tighten normalization contracts
+- improve adapter testing
+- clarify downstream payload expectations
