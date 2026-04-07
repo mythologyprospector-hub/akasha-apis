@@ -44,3 +44,11 @@ alignment:
 
 depends_on:
   - akasha-grand-atlas
+
+# ---- Canonical sections added by akasha-canon ----
+type: organ
+
+family: discovery
+
+role: apis
+
